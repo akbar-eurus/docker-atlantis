@@ -1,0 +1,24 @@
+# atlantis.yaml
+# version: 3
+# projects:
+# - name: dev
+#   dir: root
+#   workflow: dev
+
+version: 3
+projects:
+- name: custom
+  dir: root
+  workflow: custom
+
+# workflows:
+#   dev:
+#     plan:
+#       steps:
+#       - init
+#       - plan:
+#           extra_args: ["-var-file", "dev.tfvars"]
+#     policy_check:
+#       steps:
+#         - policy_check:
+#             extra_args: ["-p /home/akbar/all-terraform-project/atlantis-terraform/policies/", "--all-namespaces"]    

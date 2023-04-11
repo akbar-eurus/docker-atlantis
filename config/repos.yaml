@@ -1,0 +1,47 @@
+repos:
+- id: /.*/
+  allowed_overrides: [apply_requirements, workflow]
+  allow_custom_workflows: true
+  workflow: custom
+  allowed_workflows: [custom]  
+
+
+policies:
+  owners:
+    users:
+      - akbar-eurus
+  policy_sets:
+    - name: checking for public port 22
+      path: /home/akbar/all-terraform-project/atlantis-terraform/policies/
+      source: local
+
+
+workflows:
+  custom:
+    plan:
+      steps:
+      - init
+      - plan:
+          extra_args: ["-var-file", "dev.tfvars"]
+    policy_check:
+      steps:
+        - policy_check:
+            extra_args: ["-p /home/akbar/all-terraform-project/atlantis-terraform/policies/", "--all-namespaces"]    
+
+
+  # repo_config_file: "atlantis.yaml"
+  # allowed_workflows: [dev]
+  
+
+# workflows:
+#   dev:
+#     plan:
+#       steps:
+#       - init
+#       - plan:
+#           extra_args: ["-var-file", "dev.tfvars"]
+
+    # apply:
+    #   steps:
+    #   - apply:
+    #       extra_args: ["-var-file", "dev.tfvars "]
